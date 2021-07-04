@@ -29,7 +29,12 @@ class MovieDetailsPage extends Component {
         //     return history.push(location.state.from)
         // }
         // history.push( routes.book)
-        history.push(location?.state?.from || routes.book)
+
+        if (location.state && location.state.from) {
+            return history.push(location.state.from);
+        };
+        history.push(`${routes.home}`);
+        // history.push(location?.state?.from || routes.home)
     }
     render() {
         const { location } = this.props
@@ -38,6 +43,7 @@ class MovieDetailsPage extends Component {
         return (<div>
             <MovieDetails
                 handleGoBack={this.handleGoBack}
+
                 poster_path={poster_path}
                 title={title}
                 vote_average={vote_average}
@@ -48,17 +54,25 @@ class MovieDetailsPage extends Component {
             <ul className='MoreInformation'>
                 <li><NavLink to={{
                     pathname: `${routes.movies}/${id}/cast`,
-                    state: { from: location }
+                    state: { from: location.state.from }
                 }} className='MovieItem '>Cast</NavLink></li>
                 <li><NavLink to={{
                     pathname: `${routes.movies}/${id}/reviews`,
-                    state: { from: location }
+                    state: { from: location.state.from }
                 }} className='MovieItem'>Reviews</NavLink></li>
             </ul>
 
 
             <Route path={routes.moviesCast} component={movieCast} />
             <Route path={routes.moviesReviews} component={movieReviews} />
+
+            {/* <Route path={`${routes.moviesCast}`} render={props => {
+                return (< movieCast movieId={props.match.params.movieId} />)
+            }} />
+            <Route path={`${routes.moviesReviews}`}
+                render={props => {
+                    return < movieReviews movieId={props.match.params.movieId} />
+                }} /> */}
 
 
         </div>)
