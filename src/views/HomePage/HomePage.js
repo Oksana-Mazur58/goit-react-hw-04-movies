@@ -13,6 +13,7 @@ class HomePage extends Component {
         const response = await axios.get('https://api.themoviedb.org/3/trending/movie/day?api_key=76ed63f80dba3e42bfe198c0806fa9ba')
         console.log(response.data.results)
         this.setState({ movies: response.data.results })
+        localStorage.setItem('movies', JSON.stringify([]))
     }
     render() {
         const { movies } = this.state
