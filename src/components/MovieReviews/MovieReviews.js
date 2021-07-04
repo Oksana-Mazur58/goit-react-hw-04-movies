@@ -10,8 +10,15 @@ class movieReviews extends Component{
          const {movieId} = this.props.match.params
          const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=76ed63f80dba3e42bfe198c0806fa9ba`)
          console.log(response.data.results)
-        this.setState({ revievs: response.data.results})
+         this.setState({ revievs: response.data.results })
+         this.scrollWindow()
     }
+        scrollWindow() {
+    window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: 'smooth',
+      });
+  }
     render() {
         const {revievs} = this.state
         return (revievs.length>0 ? <div>

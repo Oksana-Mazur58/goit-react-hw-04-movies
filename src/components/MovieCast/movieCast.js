@@ -11,7 +11,14 @@ class movieCast extends Component {
         const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=76ed63f80dba3e42bfe198c0806fa9ba`)
         console.log(response.data.cast)
         this.setState({ actors: response.data.cast })
+        this.scrollWindow() 
     }
+     scrollWindow() {
+    window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: 'smooth',
+      });
+  }
     render() {
         return (<div>
             <ul className='MovieCastList'>
